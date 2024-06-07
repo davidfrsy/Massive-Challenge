@@ -22,6 +22,7 @@ const Operasional = () => {
                     </thead> 
                     <tbody>
                     <tr>
+                        <p>jangan dihapus</p>
                     </tr>
                     </tbody>
                 </table>
