@@ -29,22 +29,6 @@ const Operasional = () => {
                         <td>350.000</td> 
                         <td>-450.000</td>
                     </tr>
-                    <tr>
-                        <th>2</th> 
-                        <td>12/16/2020</td> 
-                        <td>2</td> 
-                        <td>240.000</td> 
-                        <td>350.000</td> 
-                        <td>110.000</td>
-                    </tr>
-                    <tr>
-                        <th>3</th> 
-                        <td>12/16/2020</td> 
-                        <td>3</td> 
-                        <td>230.000</td> 
-                        <td>350.000</td> 
-                        <td>120.000</td>
-                    </tr>
                     </tbody>
                 </table>
                 </div>
