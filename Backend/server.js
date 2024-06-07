@@ -234,6 +234,81 @@ app.delete("/hasilpanen/:id", (req, res) => {
   });
 });
 
+// Keuangan ####################################################################################
+
+// Endpoint untuk mendapatkan data keuangan
+app.get("/keuangan", (req, res) => {
+  const sql = "SELECT * FROM keuangan";
+  db.query(sql, (err, data) => {
+    if (err) {
+      console.error("Error executing query:", err);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
+    return res.status(200).json(data);
+  });
+});
+
+// Add new keuangan
+app.post("/keuangan", (req, res) => {
+  const newOperasional = req.body;
+  const sql = "INSERT INTO keuangan SET ?";
+  db.query(sql, newOperasional, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+// Update keuangan
+app.put("/keuangan/:id", (req, res) => {
+  const { id } = req.params;
+  const updatedOperasional = req.body;
+  const sql = `UPDATE keuangan SET ? WHERE id = ${id}`;
+  db.query(sql, updatedOperasional, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+// Delete keuangan data
+app.delete("/keuangan/:id", (req, res) => {
+  const { id } = req.params;
+  const sqlDelete = `DELETE FROM keuangan WHERE id = ${id}`;
+  db.query(sqlDelete, (err, result) => {
+    if (err) throw err;
+
+    // Check the number of remaining rows
+    const sqlCount = "SELECT COUNT(*) AS count FROM keuangan";
+    db.query(sqlCount, (err, countResult) => {
+      if (err) throw err;
+
+      const count = countResult[0].count;
+      if (count === 1) {
+        const sqlSelectLast = "SELECT id FROM keuangan LIMIT 1";
+        db.query(sqlSelectLast, (err, selectResult) => {
+          if (err) throw err;
+
+          const lastId = selectResult[0].id;
+
+          const sqlResetAutoIncrement =
+            "ALTER TABLE keuangan AUTO_INCREMENT = 1";
+          db.query(sqlResetAutoIncrement, (err, alterResult) => {
+            if (err) throw err;
+
+            const sqlUpdateId = "UPDATE keuangan SET id = 1 WHERE id = ?";
+            db.query(sqlUpdateId, [lastId], (err, updateResult) => {
+              if (err) throw err;
+
+              res.send("ID reset to 1 as only one data left in the table");
+            });
+          });
+        });
+      } else {
+        res.send("Data deleted");
+      }
+    });
+  });
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port http://localhost:${port}`);
 });
