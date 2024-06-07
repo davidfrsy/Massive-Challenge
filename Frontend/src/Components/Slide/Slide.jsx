@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './Slide.css';
-import Anime from '../../Assets/modul1.png'
+import tambak from '../../Assets/modul1.png'
 // Pindah Page
 import { Link } from 'react-router-dom'
 
@@ -111,7 +111,7 @@ const Slide = () => {
       <i id='left' className='fa-solid fa-angle-left'></i>
       <ul className='carousel'>
         <li className='card'>
-          <div className='img'><img src={Anime} alt="img" draggable="false" /></div>
+          <div className='img'><img src={tambak} alt="img" draggable="false" /></div>
           <div className='konten'>
             <h2>Bagaimana cara membudidayakan ikan lele agar cepat panen</h2>
             <p>

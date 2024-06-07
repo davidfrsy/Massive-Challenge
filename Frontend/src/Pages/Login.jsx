@@ -10,7 +10,10 @@ const Login = () => {
         email: '',
         password: ''
     })
+
     const navigate = useNavigate();
+    axios.defaults.withCredentials = true;
+
     const [errors, setErrors] = useState({
         email: '',
         password: ''
@@ -97,7 +100,7 @@ const Login = () => {
                     </button>
                     <div className='text-center text-gray-400'>
                         Buat akun baru?
-                        <Link to={'/'} className='font-bold text-blue-700'>Sign up</Link>
+                        <Link to={'/register'} className='font-bold text-blue-700'>Sign up</Link>
                     </div>
                 </form>
             </div>

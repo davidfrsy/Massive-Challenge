@@ -23,7 +23,7 @@ const SideNav = () => {
                         ${isActive ? 'bg-blue-600 text-white' : 'hover:bg-blue-700'}`
                         }>
                     <img src={idash} alt="img" className='pr-3'/>
-                    Dasboard
+                    Dashboard
                     </NavLink></li>
                 <li>
                     <NavLink to="/dash-operasi" className={({ isActive }) =>
