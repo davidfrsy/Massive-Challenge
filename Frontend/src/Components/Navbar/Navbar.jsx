@@ -24,8 +24,8 @@ const Navbar = () => {
                     <a>Budidaya</a>
                     <ul className="p-2">
                         <li><Link to="/dashboard">Dashboard</Link></li>
-                        <li><a>Manajemen Panen</a></li>
-                        <li><a>Penjualan</a></li>
+                        <li><Link to="/dash-hasilpanen">Manajemen Panen</Link></li>
+                        <li><Link to="/dash-penjualan">Penjualan</Link></li>
                     </ul>
                     </li>
                 </ul>
@@ -41,8 +41,8 @@ const Navbar = () => {
                     <summary>Budidaya</summary>
                     <ul className="p-2 bg-white">
                         <li><Link to="/dashboard">Dashboard</Link></li>
-                        <li><a>Manajemen Panen</a></li>
-                        <li><a>Penjualan</a></li>
+                        <li><Link to="/dash-hasilpanen">Manajemen Panen</Link></li>
+                        <li><Link to="/dash-penjualan">Penjualan</Link></li>
                     </ul>
                     </details>
                 </li>
