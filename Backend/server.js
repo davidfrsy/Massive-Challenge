@@ -9,7 +9,7 @@ const salt = 10;
 const app = express();
 const port = 3001;
 
-// Konfigurasi CORS
+// Konfigurasi CORS 
 const corsOptions = {
     origin: 'http://localhost:5173', // Sesuaikan dengan asal front-end Anda
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
