@@ -4,6 +4,7 @@ import axios from "axios";
 
 import updateIcon from "../../Assets/update.png"; // Path ke ikon update
 import deleteIcon from "../../Assets/delete.png"; // Path ke ikon delete
+import keu from "../../Assets/keuangan.png";
 
 const Operasional = () => {
     const [keuangan, setKeuangan] = useState([]);
@@ -64,11 +65,6 @@ const Operasional = () => {
         }
     };
 
-    const handleAdd = () => {
-        setForm({ id: '', tanggal: '', pemeliharaan: '', operasional: '', panen: '', pendapatan: '' });
-        setIsUpdateMode(false);
-        document.getElementById('my_modal_1').showModal();
-    };
 
   return (
     <div className='bg-blue-100 rounded-l-3xl w-full'>
@@ -84,16 +80,15 @@ const Operasional = () => {
                         <td>Pemeliharaan</td> 
                         <td>Operasional</td> 
                         <td>Panen</td> 
-                        <td>Pendapatan</td> 
+                        <td>Pendapatan</td>
+                        <th>Action</th>  
                     </tr>
                     </thead> 
                     <tbody>
                         {keuangan.map((data, i) => (
                             <tr key={i}>
                                 <td>{i + 1}</td>
-                                <td>
-                                    {new Date(data.tanggal).toLocaleDateString("id-ID")}
-                                </td>
+                                <td>{formatDate(data.tanggal)}</td>
                                 <td>{data.pemeliharaan}</td>
                                 <td>{data.operasional}</td>
                                 <td>{data.panen}</td>
@@ -125,7 +120,7 @@ const Operasional = () => {
 
                     <button 
                         className='btn bg-blue-700 text-white px-8 hover:bg-blue-900'
-                        onClick={handleAdd}>
+                        onClick={()=>document.getElementById('my_modal_1').showModal()}>
                         Tambah
                     </button>
 
@@ -133,9 +128,12 @@ const Operasional = () => {
                         <div className="modal-box">
 
                             <div className='flex flex-col justify-center'>
-                                <img src={keuangan} alt="img" className='w-10 self-center'/>
-                                <h3 className="font-bold text-lg text-center">
-                                {isUpdateMode ? "Update" : "Tambah"} Data Keuangan!</h3>
+                                <img src={keu} alt="img" className='w-10 self-center'/>
+                                <h3 
+                                    className="font-bold text-lg text-center">
+                                    {isUpdateMode ? "Update" : "Tambah"} 
+                                    Data Keuangan!
+                                </h3>
                             </div>
 
                             <div className='flex flex-col justify-center p-8 text-left'>
@@ -152,8 +150,7 @@ const Operasional = () => {
                                             className='border border-gray-400 rounded w-56 float-right px-1'/>
                                     </div>
                                     <div className='p-1 space-x-5 '>
-                                        <label htmlFor="pemeliharaan" className='font-bold text-lg'>
-                                            Pemeliharaan</label>
+                                        <label htmlFor="pemeliharaan" className='font-bold text-lg'>Pemeliharaan</label>
                                         <input 
                                             type="text"
                                             name="pemeliharaan"
@@ -171,8 +168,7 @@ const Operasional = () => {
                                             className='border border-gray-400 rounded w-56 float-right px-1'/>
                                     </div>
                                     <div className='p-1 space-x-5 '>
-                                        <label htmlFor="panen" className='font-bold text-lg'>
-                                            Panen</label>
+                                        <label htmlFor="panen" className='font-bold text-lg'>Panen</label>
                                         <input 
                                             type="text"
                                             name="panen"
@@ -189,21 +185,16 @@ const Operasional = () => {
                                             onChange={handleChange}  
                                             className='border border-gray-400 rounded w-56 float-right px-1'/>
                                     </div>
+                                    <div className="modal-action">
+                                        <button type="submit" className="btn">Simpan</button>
+                                        <button
+                                            type="button"
+                                            className="btn"
+                                            onClick={() => document.getElementById("my_modal_1").close()}>Close
+                                        </button>
+                                    </div>
                                 </form>
                             </div>
-
-                            <div className="modal-action">
-                                <button type="submit" className="btn">
-                                    Simpan
-                                </button>
-                                <button
-                                    type="button"
-                                    className="btn"
-                                    onClick={() => document.getElementById("my_modal_1").close()}>
-                                    Close
-                                </button>
-                            </div>
-
                         </div>
                     </dialog>
 
