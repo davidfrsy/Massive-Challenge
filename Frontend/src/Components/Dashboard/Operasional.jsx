@@ -4,7 +4,7 @@ import axios from "axios";
 
 import updateIcon from "../../Assets/update.png"; // Path ke ikon update
 import deleteIcon from "../../Assets/delete.png"; // Path ke ikon delete
-import keuangan from "../../Assets/keuangan.png";
+import ops from "../../Assets/operasional.png";
 
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import OperasionalPDF from "./OperasionalPdf";
@@ -157,7 +157,7 @@ const Operasional = () => {
             <dialog id="my_modal_1" className="modal">
               <div className="modal-box">
                 <div className="flex flex-col justify-center">
-                  <img src={keuangan} alt="img" className="w-10 self-center" />
+                  <img src={ops} alt="img" className="w-10 self-center" />
                   <h3 className="font-bold text-lg text-center">
                     {isUpdateMode ? "Update" : "Tambah"} Data Operasional!
                   </h3>

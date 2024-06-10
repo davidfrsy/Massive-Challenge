@@ -6,23 +6,28 @@ import updateIcon from "../../Assets/update.png"; // Path ke ikon update
 import deleteIcon from "../../Assets/delete.png"; // Path ke ikon delete
 import keu from "../../Assets/keuangan.png";
 
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import KeuanganPDF from "./KeuanganPdf";
+
 const Operasional = () => {
     const [keuangan, setKeuangan] = useState([]);
-    const [form, setForm] = useState({ id: '', tanggal: '', pemeliharaan: '', operasional: '', panen: '', pendapatan: '' });
+    const [form, setForm] = useState({
+        id: "",
+        tanggal: "",
+        pemeliharaan: "",
+        operasional: "",
+        panen: "",
+        pendapatan: "",
+    });
     const [isUpdateMode, setIsUpdateMode] = useState(false);
-
-    const formatDate = (dateString) => {
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        return new Date(dateString).toLocaleDateString(undefined, options);
-    };
 
     useEffect(() => {
         fetchKeuangan();
     }, []);
-
+    
     const fetchKeuangan = async () => {
         try {
-            const res = await axios.get('http://localhost:3001/keuangan');
+            const res = await axios.get("http://localhost:3001/keuangan");
             setKeuangan(res.data);
         } catch (err) {
             console.log(err);
@@ -39,12 +44,19 @@ const Operasional = () => {
             if (isUpdateMode) {
                 await axios.put(`http://localhost:3001/keuangan/${form.id}`, form);
             } else {
-                await axios.post('http://localhost:3001/keuangan', form);
+                await axios.post("http://localhost:3001/keuangan", form);
             }
-            setForm({ id: '', tanggal: '', pemeliharaan: '', operasional: '', panen: '', pendapatan: '' });
+            setForm({
+                id: "",
+                tanggal: "",
+                pemeliharaan: "",
+                operasional: "",
+                panen: "",
+                pendapatan: "",
+            });
             setIsUpdateMode(false);
-            fetchHasil();
-            document.getElementById('my_modal_1').close();
+            fetchKeuangan();
+            document.getElementById("my_modal_1").close();
         } catch (err) {
             console.log(err);
         }
@@ -59,10 +71,24 @@ const Operasional = () => {
     const handleDelete = async (id) => {
         try {
             await axios.delete(`http://localhost:3001/keuangan/${id}`);
-            fetchHasil();
+            fetchKeuangan();
         } catch (err) {
             console.log(err);
         }
+    };
+
+    const handleAdd = () => {
+        setForm({
+            id: "",
+            tanggal: "",
+            pemeliharaan: "",
+            bibit: "",
+            pakan: "",
+            suplemen: "",
+            lainnya: "",
+        });
+        setIsUpdateMode(false);
+        document.getElementById("my_modal_1").showModal();
     };
 
 
@@ -88,7 +114,9 @@ const Operasional = () => {
                         {keuangan.map((data, i) => (
                             <tr key={i}>
                                 <td>{i + 1}</td>
-                                <td>{formatDate(data.tanggal)}</td>
+                                <td>
+                                    {new Date(data.tanggal).toLocaleDateString("id-ID")}
+                                </td>
                                 <td>{data.pemeliharaan}</td>
                                 <td>{data.operasional}</td>
                                 <td>{data.panen}</td>
@@ -120,7 +148,7 @@ const Operasional = () => {
 
                     <button 
                         className='btn bg-blue-700 text-white px-8 hover:bg-blue-900'
-                        onClick={()=>document.getElementById('my_modal_1').showModal()}>
+                        onClick={handleAdd}>
                         Tambah
                     </button>
 
@@ -131,8 +159,7 @@ const Operasional = () => {
                                 <img src={keu} alt="img" className='w-10 self-center'/>
                                 <h3 
                                     className="font-bold text-lg text-center">
-                                    {isUpdateMode ? "Update" : "Tambah"} 
-                                    Data Keuangan!
+                                    {isUpdateMode ? "Update" : "Tambah"} Data Keuangan!
                                 </h3>
                             </div>
 
@@ -198,10 +225,19 @@ const Operasional = () => {
                         </div>
                     </dialog>
 
-                    <button 
-                        className='btn bg-blue-700 text-white px-8 hover:bg-blue-900'>
-                        Cetak
-                    </button>
+                    <PDFDownloadLink
+                        document={<KeuanganPDF data={keuangan} />}
+                        fileName="laporan_keuangan.pdf">
+                        {({ loading }) =>
+                            loading ? (
+                            "Loading document..."
+                            ) : (
+                            <button className="btn bg-blue-700 text-white px-8 hover:bg-blue-900">
+                                Cetak
+                            </button>
+                            )
+                        }
+                    </PDFDownloadLink>
                 </div>
             </div>
         </div>
