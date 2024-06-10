@@ -64,12 +64,6 @@ const HasilPanen = () => {
         }
     };
 
-    const handleAdd = () => {
-        setForm({ id: '', tanggal: '', pemeliharaan: '', jenis: '', harga: '', berat: '', total: '' });
-        setIsUpdateMode(false);
-        document.getElementById('my_modal_1').showModal();
-    };
-
   return (
     <div className='bg-blue-100 rounded-l-3xl w-full'>
         <div className='m-5'>
@@ -101,10 +95,17 @@ const HasilPanen = () => {
                                 <td>{data.total}</td>
                                 <td className='space-x-3'>
                                     <button onClick={() => handleUpdate(data)}>
-                                        <img src={updateIcon} alt="Update" className='w-6 h-6 inline' />
+                                        <img 
+                                        src={updateIcon} 
+                                        alt="Update" 
+                                        className='w-6 h-6 inline' />
                                     </button>
                                     <button onClick={() => handleDelete(data.id)}>
-                                        <img src={deleteIcon} alt="Delete" className='w-6 h-6 inline' />
+                                        <img 
+                                        src={deleteIcon} 
+                                        alt="Delete" 
+                                        className='w-6 h-6 inline' 
+                                        />
                                     </button>
                                 </td>
                             </tr>
@@ -126,37 +127,75 @@ const HasilPanen = () => {
                             <div className="modal-box">
                                 <div className='flex flex-col justify-center'>
                                     <img src={panen} alt="img" className='w-10 self-center' />
-                                    <h3 className="font-bold text-lg text-center">{isUpdateMode ? 'Update' : 'Tambah'} Data Hasil Panen!</h3>
+                                    <h3 
+                                        className="font-bold text-lg text-center">
+                                        {isUpdateMode ? 'Update' : 'Tambah'} 
+                                        Data Hasil Panen!
+                                    </h3>
                                 </div>
                                 <div className='flex flex-col justify-center p-8 text-left'>
                                     <form onSubmit={handleSubmit} className='p-2 text-justify'>
                                         <div className='p-1 space-x-5 '>
                                             <label htmlFor="tanggal" className='font-bold text-lg'>Tanggal</label>
-                                            <input type="date" name="tanggal" value={form.tanggal} onChange={handleChange} className='border border-gray-400 rounded w-56 float-right px-1' />
+                                            <input 
+                                                type="date" 
+                                                name="tanggal" 
+                                                value={form.tanggal}
+                                                onChange={handleChange} 
+                                                className='border border-gray-400 rounded w-56 float-right px-1' />
                                         </div>
                                         <div className='p-1 space-x-5 '>
                                             <label htmlFor="pemeliharaan" className='font-bold text-lg'>Pemeliharaan</label>
-                                            <input type="text" name="pemeliharaan" value={form.pemeliharaan} onChange={handleChange} className='border border-gray-400 rounded w-56 float-right px-1' />
+                                            <input 
+                                                type="text" 
+                                                name="pemeliharaan" 
+                                                value={form.pemeliharaan} 
+                                                onChange={handleChange} 
+                                                className='border border-gray-400 rounded w-56 float-right px-1' />
                                         </div>
                                         <div className='p-1 space-x-5 '>
                                             <label htmlFor="jenis" className='font-bold text-lg'>Jenis</label>
-                                            <input type="text" name="jenis" value={form.jenis} onChange={handleChange} className='border border-gray-400 rounded w-56 float-right px-1' />
+                                            <input 
+                                                type="text" 
+                                                name="jenis" 
+                                                value={form.jenis} 
+                                                onChange={handleChange} 
+                                                className='border border-gray-400 rounded w-56 float-right px-1' />
                                         </div>
                                         <div className='p-1 space-x-5 '>
                                             <label htmlFor="harga" className='font-bold text-lg'>Harga</label>
-                                            <input type="text" name="harga" value={form.harga} onChange={handleChange} className='border border-gray-400 rounded w-56 float-right px-1' />
+                                            <input 
+                                                type="text" 
+                                                name="harga" 
+                                                value={form.harga} 
+                                                onChange={handleChange} 
+                                                className='border border-gray-400 rounded w-56 float-right px-1' />
                                         </div>
                                         <div className='p-1 space-x-5 '>
                                             <label htmlFor="berat" className='font-bold text-lg'>Berat</label>
-                                            <input type="text" name="berat" value={form.berat} onChange={handleChange} className='border border-gray-400 rounded w-56 float-right px-1' />
+                                            <input 
+                                                type="text" 
+                                                name="berat" 
+                                                value={form.berat} 
+                                                onChange={handleChange} 
+                                                className='border border-gray-400 rounded w-56 float-right px-1' />
                                         </div>
                                         <div className='p-1 space-x-5 '>
                                             <label htmlFor="Total" className='font-bold text-lg'>Total</label>
-                                            <input type="text" name="total" value={form.total} onChange={handleChange} className='border border-gray-400 rounded w-56 float-right px-1' />
+                                            <input 
+                                                type="text" 
+                                                name="total" 
+                                                value={form.total} 
+                                                onChange={handleChange} 
+                                                className='border border-gray-400 rounded w-56 float-right px-1' />
                                         </div>
                                         <div className='modal-action'>
                                             <button type="submit" className="btn">Simpan</button>
-                                            <button type="button" className="btn" onClick={() => document.getElementById('my_modal_1').close()}>Close</button>
+                                            <button 
+                                                type="button" 
+                                                className="btn" 
+                                                onClick={() => document.getElementById('my_modal_1').close()}>Close
+                                            </button>
                                         </div>
                                     </form>
                                 </div>

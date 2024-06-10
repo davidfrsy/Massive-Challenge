@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import NavDash from "./NavDash";
-import ops from "../../Assets/operasional.png";
 import axios from "axios";
+
 import updateIcon from "../../Assets/update.png"; // Path ke ikon update
 import deleteIcon from "../../Assets/delete.png"; // Path ke ikon delete
+import ops from "../../Assets/operasional.png";
+
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import OperasionalPDF from "./OperasionalPdf";
 
@@ -148,8 +150,7 @@ const Operasional = () => {
           <div className="flex space-x-3">
             <button
               className="btn bg-blue-700 text-white px-8 hover:bg-blue-900"
-              onClick={handleAdd}
-            >
+              onClick={handleAdd}>
               Tambah
             </button>
 
@@ -178,8 +179,7 @@ const Operasional = () => {
                     <div className="p-1 space-x-5 ">
                       <label
                         htmlFor="pemeliharaan"
-                        className="font-bold text-lg"
-                      >
+                        className="font-bold text-lg">
                         Pemeliharaan
                       </label>
                       <input
@@ -259,8 +259,7 @@ const Operasional = () => {
 
             <PDFDownloadLink
               document={<OperasionalPDF data={operasional} />}
-              fileName="laporan_operasional.pdf"
-            >
+              fileName="laporan_operasional.pdf">
               {({ loading }) =>
                 loading ? (
                   "Loading document..."
