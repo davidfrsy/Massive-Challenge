@@ -6,6 +6,7 @@ const db = require("./config/db");
 const authRoutes = require("./routes/auth");
 const operasionalRoutes = require("./routes/operasional");
 const hasilpanenRoutes = require("./routes/hasilpanen");
+const keuanganRoutes = require("./routes/keuangan");
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use("/auth", authRoutes);
 app.use("/operasional", operasionalRoutes);
 app.use("/hasilpanen", hasilpanenRoutes);
+app.use("/keuangan", keuanganRoutes);
 
 app.get("/", (req, res) => {
   res.send("Welcome to the authentication API");
