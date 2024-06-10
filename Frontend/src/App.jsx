@@ -30,7 +30,6 @@ const App = () => {
           <Route path='/dash-operasi' element={<DashOperasi/>}/>
           <Route path='/dash-hasilpanen' element={<DashPanen/>}/>
           <Route path='/dash-keuangan' element={<DashKeuangan/>}/>
-
         </Routes>
       </div>
     </BrowserRouter>
