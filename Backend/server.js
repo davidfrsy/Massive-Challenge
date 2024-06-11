@@ -4,6 +4,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const db = require("./config/db");
 const authRoutes = require("./routes/auth");
+const helpRoutes = require("./routes/help");
 const operasionalRoutes = require("./routes/operasional");
 const hasilpanenRoutes = require("./routes/hasilpanen");
 const keuanganRoutes = require("./routes/keuangan");
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/auth", authRoutes);
+app.use("/help", helpRoutes);
 app.use("/operasional", operasionalRoutes);
 app.use("/hasilpanen", hasilpanenRoutes);
 app.use("/keuangan", keuanganRoutes);
