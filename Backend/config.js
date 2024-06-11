@@ -23,13 +23,13 @@ const User = sequelize.define("users", {
   },
 });
 
-// sequelize
-//   .sync()
-//   .then(() => {
-//     console.log("Users table created (if not exist)");
-//   })
-//   .catch((err) => {
-//     console.error("Error creating users table:", err);
-//   });
+sequelize
+  .sync()
+  .then(() => {
+    console.log("Users table created (if not exist)");
+  })
+  .catch((err) => {
+    console.error("Error creating users table:", err);
+  });
 
 module.exports = User;

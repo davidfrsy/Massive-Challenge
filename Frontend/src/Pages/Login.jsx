@@ -4,8 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import bgLogin from "../Assets/bg-login.png";
 import lgLogin from "../Assets/lg-login.png";
 import googleIcon from "../Assets/google.svg";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [values, setValues] = useState({
