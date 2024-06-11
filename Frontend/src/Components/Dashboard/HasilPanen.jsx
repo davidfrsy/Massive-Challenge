@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import NavDash from './NavDash'
-import panen from '../../Assets/hasil-panen.png'
 import axios from 'axios';
+
 import updateIcon from '../../Assets/update.png'; // Path ke ikon update
 import deleteIcon from '../../Assets/delete.png'; // Path ke ikon delete
+import panen from '../../Assets/hasil-panen.png'
+
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import HasilPanenPDF from "./HasilPanenPdf";
 
 const HasilPanen = () => {
     const [hasilpanen, setHasil] = useState([]);
-    const [form, setForm] = useState({ id: '', tanggal: '', pemeliharaan: '', jenis: '', harga: '', berat: '', total: '' });
+    const [form, setForm] = useState({ 
+        id: '', 
+        tanggal: '', 
+        pemeliharaan: '', 
+        jenis: '', 
+        harga: '', 
+        berat: '', 
+        total: '' 
+    });
     const [isUpdateMode, setIsUpdateMode] = useState(false);
-
-    const formatDate = (dateString) => {
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        return new Date(dateString).toLocaleDateString(undefined, options);
-    };
 
     useEffect(() => {
         fetchHasil();
@@ -21,7 +28,7 @@ const HasilPanen = () => {
 
     const fetchHasil = async () => {
         try {
-            const res = await axios.get('http://localhost:3001/hasilpanen');
+            const res = await axios.get("http://localhost:3001/hasilpanen");
             setHasil(res.data);
         } catch (err) {
             console.log(err);
@@ -36,14 +43,22 @@ const HasilPanen = () => {
         e.preventDefault();
         try {
             if (isUpdateMode) {
-                await axios.put(`http://localhost:3001/hasilpanen/${form.id}`, form);
+            await axios.put(`http://localhost:3001/hasilpanen/${form.id}`, form);
             } else {
-                await axios.post('http://localhost:3001/hasilpanen', form);
+            await axios.post("http://localhost:3001/hasilpanen", form);
             }
-            setForm({ id: '', tanggal: '', pemeliharaan: '', jenis: '', harga: '', berat: '', total: '' });
+            setForm({
+                id: "",
+                tanggal: "",
+                pemeliharaan: "",
+                jenis: "",
+                harga: "",
+                berat: "",
+                total: "",
+            });
             setIsUpdateMode(false);
             fetchHasil();
-            document.getElementById('my_modal_1').close();
+            document.getElementById("my_modal_1").close();
         } catch (err) {
             console.log(err);
         }
@@ -52,7 +67,7 @@ const HasilPanen = () => {
     const handleUpdate = (data) => {
         setForm(data);
         setIsUpdateMode(true);
-        document.getElementById('my_modal_1').showModal();
+        document.getElementById("my_modal_1").showModal();
     };
 
     const handleDelete = async (id) => {
@@ -62,6 +77,20 @@ const HasilPanen = () => {
         } catch (err) {
             console.log(err);
         }
+    };
+
+    const handleAdd = () => {
+        setForm({
+            id: "",
+            tanggal: "",
+            pemeliharaan: "",
+            jenis: "",
+            harga: "",
+            berat: "",
+            total: "",
+        });
+        setIsUpdateMode(false);
+        document.getElementById("my_modal_1").showModal();
     };
 
   return (
@@ -87,7 +116,9 @@ const HasilPanen = () => {
                         {hasilpanen.map((data, i) => (
                             <tr key={i}>
                                 <td>{i + 1}</td>
-                                <td>{formatDate(data.tanggal)}</td>
+                                <td>
+                                    {new Date(data.tanggal).toLocaleDateString("id-ID")}
+                                </td>
                                 <td>{data.pemeliharaan}</td>
                                 <td>{data.jenis}</td>
                                 <td>{data.harga}</td>
@@ -119,93 +150,114 @@ const HasilPanen = () => {
 
                     <button 
                         className='btn bg-blue-700 text-white px-8 hover:bg-blue-900'
-                        onClick={()=>document.getElementById('my_modal_1').showModal()}>
+                        onClick={handleAdd}>
                         Tambah
                     </button>
 
                     <dialog id="my_modal_1" className="modal">
-                            <div className="modal-box">
-                                <div className='flex flex-col justify-center'>
-                                    <img src={panen} alt="img" className='w-10 self-center' />
-                                    <h3 
-                                        className="font-bold text-lg text-center">
-                                        {isUpdateMode ? 'Update' : 'Tambah'} 
-                                        Data Hasil Panen!
-                                    </h3>
-                                </div>
-                                <div className='flex flex-col justify-center p-8 text-left'>
-                                    <form onSubmit={handleSubmit} className='p-2 text-justify'>
-                                        <div className='p-1 space-x-5 '>
-                                            <label htmlFor="tanggal" className='font-bold text-lg'>Tanggal</label>
-                                            <input 
-                                                type="date" 
-                                                name="tanggal" 
-                                                value={form.tanggal}
-                                                onChange={handleChange} 
-                                                className='border border-gray-400 rounded w-56 float-right px-1' />
-                                        </div>
-                                        <div className='p-1 space-x-5 '>
-                                            <label htmlFor="pemeliharaan" className='font-bold text-lg'>Pemeliharaan</label>
-                                            <input 
-                                                type="text" 
-                                                name="pemeliharaan" 
-                                                value={form.pemeliharaan} 
-                                                onChange={handleChange} 
-                                                className='border border-gray-400 rounded w-56 float-right px-1' />
-                                        </div>
-                                        <div className='p-1 space-x-5 '>
-                                            <label htmlFor="jenis" className='font-bold text-lg'>Jenis</label>
-                                            <input 
-                                                type="text" 
-                                                name="jenis" 
-                                                value={form.jenis} 
-                                                onChange={handleChange} 
-                                                className='border border-gray-400 rounded w-56 float-right px-1' />
-                                        </div>
-                                        <div className='p-1 space-x-5 '>
-                                            <label htmlFor="harga" className='font-bold text-lg'>Harga</label>
-                                            <input 
-                                                type="text" 
-                                                name="harga" 
-                                                value={form.harga} 
-                                                onChange={handleChange} 
-                                                className='border border-gray-400 rounded w-56 float-right px-1' />
-                                        </div>
-                                        <div className='p-1 space-x-5 '>
-                                            <label htmlFor="berat" className='font-bold text-lg'>Berat</label>
-                                            <input 
-                                                type="text" 
-                                                name="berat" 
-                                                value={form.berat} 
-                                                onChange={handleChange} 
-                                                className='border border-gray-400 rounded w-56 float-right px-1' />
-                                        </div>
-                                        <div className='p-1 space-x-5 '>
-                                            <label htmlFor="Total" className='font-bold text-lg'>Total</label>
-                                            <input 
-                                                type="text" 
-                                                name="total" 
-                                                value={form.total} 
-                                                onChange={handleChange} 
-                                                className='border border-gray-400 rounded w-56 float-right px-1' />
-                                        </div>
-                                        <div className='modal-action'>
-                                            <button type="submit" className="btn">Simpan</button>
-                                            <button 
-                                                type="button" 
-                                                className="btn" 
-                                                onClick={() => document.getElementById('my_modal_1').close()}>Close
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
+                        <div className="modal-box">
+                            <div className='flex flex-col justify-center'>
+                                <img src={panen} alt="img" className='w-10 self-center' />
+                                <h3 
+                                    className="font-bold text-lg text-center">
+                                    {isUpdateMode ? 'Update' : 'Tambah'} Data Hasil Panen!
+                                </h3>
                             </div>
-                        </dialog>
+                            <div className='flex flex-col justify-center p-8 text-left'>
+                                <form onSubmit={handleSubmit} className='p-2 text-justify'>
+                                    <div className='p-1 space-x-5 '>
+                                        <label htmlFor="tanggal" className='font-bold text-lg'>
+                                            Tanggal
+                                        </label>
+                                        <input 
+                                            type="date" 
+                                            name="tanggal" 
+                                            value={form.tanggal}
+                                            onChange={handleChange} 
+                                            className='border border-gray-400 rounded w-56 float-right px-1' />
+                                    </div>
+                                    <div className='p-1 space-x-5 '>
+                                        <label 
+                                            htmlFor="pemeliharaan" 
+                                            className='font-bold text-lg'>
+                                            Pemeliharaan
+                                        </label>
+                                        <input 
+                                            type="text" 
+                                            name="pemeliharaan" 
+                                            value={form.pemeliharaan} 
+                                            onChange={handleChange} 
+                                            className='border border-gray-400 rounded w-56 float-right px-1' />
+                                    </div>
+                                    <div className='p-1 space-x-5 '>
+                                        <label 
+                                            htmlFor="jenis" 
+                                            className='font-bold text-lg'>
+                                            Jenis
+                                        </label>
+                                        <input 
+                                            type="text" 
+                                            name="jenis" 
+                                            value={form.jenis} 
+                                            onChange={handleChange} 
+                                            className='border border-gray-400 rounded w-56 float-right px-1' />
+                                    </div>
+                                    <div className='p-1 space-x-5 '>
+                                        <label htmlFor="harga" className='font-bold text-lg'>Harga</label>
+                                        <input 
+                                            type="text" 
+                                            name="harga" 
+                                            value={form.harga} 
+                                            onChange={handleChange} 
+                                            className='border border-gray-400 rounded w-56 float-right px-1' />
+                                    </div>
+                                    <div className='p-1 space-x-5 '>
+                                        <label htmlFor="berat" className='font-bold text-lg'>Berat</label>
+                                        <input 
+                                            type="text" 
+                                            name="berat" 
+                                            value={form.berat} 
+                                            onChange={handleChange} 
+                                            className='border border-gray-400 rounded w-56 float-right px-1' />
+                                    </div>
+                                    <div className='p-1 space-x-5 '>
+                                        <label htmlFor="Total" className='font-bold text-lg'>Total</label>
+                                        <input 
+                                            type="text" 
+                                            name="total" 
+                                            value={form.total} 
+                                            onChange={handleChange} 
+                                            className='border border-gray-400 rounded w-56 float-right px-1' />
+                                    </div>
 
-                    <button 
-                        className='btn bg-blue-700 text-white px-8 hover:bg-blue-900'>
-                        Cetak
-                    </button>
+                                    <div className="modal-action">
+                                        <button type="submit" className="btn">
+                                            Simpan
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className="btn"
+                                            onClick={() => document.getElementById("my_modal_1").close()}>
+                                            Close
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </dialog>
+                    <PDFDownloadLink
+                        document={<HasilPanenPDF data={hasilpanen} />}
+                        fileName="laporan_hasil_panen.pdf">
+                        {({ loading }) =>
+                        loading ? (
+                            "Loading document..."
+                        ) : (
+                            <button className="btn bg-blue-700 text-white px-8 hover:bg-blue-900">
+                            Cetak
+                            </button>
+                        )
+                        }
+                    </PDFDownloadLink>
                 </div>
             </div>
         </div>
