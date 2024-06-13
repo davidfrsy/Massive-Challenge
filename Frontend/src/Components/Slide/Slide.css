@@ -5,9 +5,8 @@
   max-width: 1000px;
   width: 100%;
   position: relative;
-  margin-left: 280px;
-  padding-top: 25px;
-  padding-bottom: 100px;
+  margin: auto;
+  padding: 24px;
 }
 
 .wrapper i {
@@ -65,28 +64,22 @@
   cursor: grab;
   user-select: none;
 }
-.carousel :where(.card, .img) {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 .carousel .card {
   scroll-snap-align: start;
-  height: 350px;
+  height: 400px;
   list-style: none;
   background: #fff;
-  /* cursor: pointer; */
-  padding-bottom: 15px;
-  flex-direction: column;
   border-radius: 8px;
   border: solid 1px grey;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .carousel .card .img {
+  margin: auto;
+  padding: 4px;
   height: 150px;
-  width: 300px;
-  padding: 8px;
+  width: 260px;
   border-radius: 8px;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
@@ -110,18 +103,17 @@
   font-size: 1.31rem;
 }
 
-/* .card:hover{
-  background-color: rgb(58, 119, 199);
-  color: white;
-} */
-
 .konten{
-  padding: 2px 18px;
+  padding: 5px 18px;
   font-size: 14px;
 }
 
 .konten a{
   color: blue;
+}
+
+.konten p{
+  text-align: justify;
 }
 .konten a:hover{
   text-decoration: underline;

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './Slide.css';
-import tambak from '../../Assets/modul1.png'
+import modul1 from '../../Assets/modul1.png'
 // Pindah Page
 import { Link } from 'react-router-dom'
 
@@ -111,11 +111,36 @@ const Slide = () => {
       <i id='left' className='fa-solid fa-angle-left'></i>
       <ul className='carousel'>
         <li className='card'>
-          <div className='img'><img src={tambak} alt="img" draggable="false" /></div>
           <div className='konten'>
+          <div className='img'><img src={modul1} alt="img" draggable="false" /></div>
             <h2>Bagaimana cara membudidayakan ikan lele agar cepat panen</h2>
             <p>
               Agar menghasilkan panen yang melimpah dan segar perlu adanya
+            </p>
+            <Link to="/modul" >Baca Selengkapnya...</Link>
+          </div>
+        </li>
+        <li className='card'>
+          <div className='konten'>
+            <div className='img'><img src="https://img.freepik.com/free-photo/wild-mouth-white-meal-seafood_1203-6019.jpg?t=st=1718265602~exp=1718269202~hmac=cfca9f575c6a640341f10d9557e66c24b9b7a1dbc34658a07c6e89d5046a45cc&w=996" alt="img" draggable="false" /></div>
+            <h2>Kandungan Gizi dan Manfaat Ikan Bawal untuk Kesehatan</h2>
+            <p>
+              Ikan bawal mengandung berbagai nutrisi baik, 
+              seperti asam lemak omega-3, vitamin dan mineral 
+              penting, serta protein
+            </p>
+            <Link to="/modul" >Baca Selengkapnya...</Link>
+          </div>
+        </li>
+        <li className='card'>
+          <div className='konten'>
+            <div className='img'><img src="https://img.freepik.com/free-photo/close-up-hand-holding-raw-fish_23-2148295207.jpg?t=st=1718265545~exp=1718269145~hmac=93a8f5bcda93770c18a530ee117a72fc74636c14df24cfedb0a0b7502875f778&w=900" alt="img" draggable="false" /></div>
+            <h2>Ikan Nila: Sumber Protein Tinggi dan Gizi Seimbang untuk Kesehatan Keluarga</h2>
+            <p>
+              Ikan nila adalah ikan air tawar yang 
+              populer di budidaya perikanan karena 
+              pertumbuhannya yang cepat dan toleransinya 
+              terhadap berbagai kondisi lingkungan.
             </p>
             <Link to="/modul" >Baca Selengkapnya...</Link>
           </div>
