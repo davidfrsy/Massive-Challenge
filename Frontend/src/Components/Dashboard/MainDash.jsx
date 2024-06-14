@@ -2,13 +2,14 @@ import React from "react";
 import NavDash from "./NavDash";
 
 const MainDash = () => {
+  const auth = useAuth();
   return (
     <div className="bg-blue-100 rounded-l-3xl w-full">
       <div className="m-5">
         <NavDash />
         <div className="m-5">
           <div className="p-9 border border-gray-200 shadow-lg space-y-4 bg-white max-w-screen-xl">
-            <h3 className="text-3xl">Selamat Datang, Sugi!</h3>
+            <h3 className="text-3xl">Selamat Datang, {auth.user?.name}</h3>
 
             <p className="text-justify text-xl max-w-5xl">
               Layanan manajemen perikanan sebagai solusi bagi pembudidaya ikan

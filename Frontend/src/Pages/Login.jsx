@@ -12,6 +12,7 @@ const Login = () => {
   });
 
   const navigate = useNavigate();
+  const auth = useAuth()
 
   const handleInput = (event) => {
     const { name, value } = event.target;
@@ -29,6 +30,7 @@ const Login = () => {
       );
 
       if (response.status === 200 && response.data.status === "Success") {
+        auth.loginAction(input);
         navigate("/dashboard");
       } else {
         console.log("Email atau password salah");
