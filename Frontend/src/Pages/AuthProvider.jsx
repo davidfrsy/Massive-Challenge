@@ -12,7 +12,7 @@ const AuthProvider = ({ children }) => {
 
     const loginAction = async (data) => {
         try {
-            const response = await fetch("http://localhost:5173/auth/login", { 
+            const response = await fetch("http://localhost:3001/auth/login", { 
                 method: "POST", // Menambahkan metode permintaan POST
                 headers: {
                     "Content-Type": "application/json",

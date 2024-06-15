@@ -1,6 +1,6 @@
 import React from 'react'
 import sugi from '../../Assets/paksugi.png'
-import { useAuth } from '../../../../Backend/config/AuthProvider'
+import { useAuth } from '../../Pages/AuthProvider';
 
 const NavDash = () => {
   const auth = useAuth();

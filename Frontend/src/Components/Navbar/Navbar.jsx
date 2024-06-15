@@ -23,7 +23,7 @@ const Navbar = () => {
                     <ul className="p-2">
                         <li><Link to="/dashboard">Dashboard</Link></li>
                         <li><Link to="/dash-hasilpanen">Manajemen Panen</Link></li>
-                        <li><Link to="/dash-penjualan">Penjualan</Link></li>
+                        <li><Link to="/dash-keuangan">Keuangan</Link></li>
                     </ul>
                     </li>
                 </ul>
@@ -40,7 +40,7 @@ const Navbar = () => {
                     <ul className="p-2 bg-white">
                         <li><Link to="/dashboard">Dashboard</Link></li>
                         <li><Link to="/dash-hasilpanen">Manajemen Panen</Link></li>
-                        <li><Link to="/dash-penjualan">Penjualan</Link></li>
+                        <li><Link to="/dash-keuangan">Keuangan</Link></li>
                     </ul>
                     </details>
                 </li>

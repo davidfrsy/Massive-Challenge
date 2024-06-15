@@ -10,8 +10,8 @@ import DashboardMenu from './Pages/DashboardMenu'
 import DashOperasi from './Pages/DashOperasi'
 import DashPanen from './Pages/DashPanen'
 import DashKeuangan from './Pages/DashKeuangan'
-import AuthProvider from '../../Backend/config/AuthProvider'
-import PrivateRoute from '../../Backend/routes/PrivateRoute'
+import AuthProvider from './Pages/AuthProvider'
+import PrivateRoute from './Pages/PrivateRoute'
 
 const App = () => {
   return (

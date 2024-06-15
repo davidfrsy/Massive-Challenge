@@ -4,15 +4,16 @@ import { Link, useNavigate } from "react-router-dom";
 import bgLogin from "../Assets/bg-login.png";
 import lgLogin from "../Assets/lg-login.png";
 import googleIcon from "../Assets/google.svg";
+import { useAuth } from "./AuthProvider";
 
 const Login = () => {
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
-
+  console.log(values);
   const navigate = useNavigate();
-  const auth = useAuth()
+  const auth = useAuth();
 
   const handleInput = (event) => {
     const { name, value } = event.target;
@@ -30,7 +31,7 @@ const Login = () => {
       );
 
       if (response.status === 200 && response.data.status === "Success") {
-        auth.loginAction(input);
+        auth.loginAction(values);
         navigate("/dashboard");
       } else {
         console.log("Email atau password salah");
@@ -54,6 +55,7 @@ const Login = () => {
                 type="email"
                 className="w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-50 text-black"
                 name="email"
+                value={values.email}
                 onChange={handleInput}
                 required
               />
@@ -66,6 +68,7 @@ const Login = () => {
                 type="password"
                 className="w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500 text-black"
                 name="password"
+                value={values.password}
                 onChange={handleInput}
                 required
               />
