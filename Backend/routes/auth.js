@@ -19,7 +19,8 @@ router.post("/register", async (req, res) => {
       name,
       email,
       password: hashedPassword,
-    });
+    }); 
+    // ganti
 
     return res.status(200).json({ status: "Success" });
   } catch (error) {
@@ -40,18 +41,20 @@ router.post("/login", async (req, res) => {
 
     const isMatch = await bcrypt.compare(password, user.password);
 
+    console.log(user.dataValues.name);
     if (isMatch) {
-      const token = jwt.sign({ name: user.name }, ACCESS_TOKEN_SECRET, {
+      const userData = {name: user.dataValues.name};
+      const token = jwt.sign({ name: user.dataValues.name }, ACCESS_TOKEN_SECRET, {
         expiresIn: "1d",
       });
 
-      return res.status(200).json({ status: "Success", token });
+      return res.status(200).json({ status: "Success", token, user:userData });
     } else {
       return res.status(401).json({ error: "Password not matched" });
     }
   } catch (error) {
     console.error("Error logging in:", error);
-    return res.status(500).json({ error: "Error logging in" });
+    return res.status(500).json({ error: "Error logging in", err: error });
   }
 });
 

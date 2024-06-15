@@ -10,12 +10,14 @@ import DashboardMenu from './Pages/DashboardMenu'
 import DashOperasi from './Pages/DashOperasi'
 import DashPanen from './Pages/DashPanen'
 import DashKeuangan from './Pages/DashKeuangan'
-
+import AuthProvider from './Pages/AuthProvider'
+import PrivateRoute from './Pages/PrivateRoute'
 
 const App = () => {
   return (
     <BrowserRouter >
       <div>
+      <AuthProvider>
         <Routes>
           {/* HomePage */}
           <Route path='/' element={<Home/>}/>
@@ -26,11 +28,14 @@ const App = () => {
           {/* Register */}
           <Route path='/register' element={<Register/>}/>
           {/* Menu setelah login */}
-          <Route path='/dashboard' element={<DashboardMenu/>}/>
-          <Route path='/dash-operasi' element={<DashOperasi/>}/>
-          <Route path='/dash-hasilpanen' element={<DashPanen/>}/>
-          <Route path='/dash-keuangan' element={<DashKeuangan/>}/>
+            <Route element={<PrivateRoute/>}>
+              <Route path='/dashboard' element={<DashboardMenu/>}/>
+              <Route path='/dash-operasi' element={<DashOperasi/>}/>
+              <Route path='/dash-hasilpanen' element={<DashPanen/>}/>
+              <Route path='/dash-keuangan' element={<DashKeuangan/>}/>
+            </Route>
         </Routes>
+      </AuthProvider>
       </div>
     </BrowserRouter>
   )

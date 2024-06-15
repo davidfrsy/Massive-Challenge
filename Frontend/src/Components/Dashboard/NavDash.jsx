@@ -1,7 +1,10 @@
 import React from 'react'
 import sugi from '../../Assets/paksugi.png'
-import { Link } from 'react-router-dom'
+import { useAuth } from '../../Pages/AuthProvider';
+
 const NavDash = () => {
+  const auth = useAuth();
+
   return (
     <div className='m-5 px-10 min-w-screen-lg max-w-screen w-full'>
         <div className='navbar'>
@@ -23,7 +26,7 @@ const NavDash = () => {
                   </div>
                 </div>
                 <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[100] p-2 shadow bg-base-100 rounded-box w-52">
-                  <li><Link to="/">Logout</Link></li>
+                  <li><button onClick={() => auth.logOut()}>Logout</button></li>
                 </ul>
               </div>
             </div>
