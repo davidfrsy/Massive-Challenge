@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/auth", authRoutes);
-app.use("/help", helpRoutes);
+app.use("/helps", helpRoutes);
 app.use("/operasional", operasionalRoutes);
 app.use("/hasilpanen", hasilpanenRoutes);
 app.use("/keuangan", keuanganRoutes);

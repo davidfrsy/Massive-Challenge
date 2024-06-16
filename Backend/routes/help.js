@@ -1,23 +1,26 @@
 const express = require("express");
-const Help = require("../config/confighelp");
+const db = require("../config/db");
 
 const router = express.Router();
 
-router.post("/message", async (req, res) => {
-    try {
-        const { name, email, message } = req.body;
-
-        const newHelp = await Help.create({
-        name,
-        email,
-        message,
-        });
-
-        return res.status(200).json({ status: "Success" });
-    } catch (error) {
-        console.error("Error registering user:", error);
-        return res.status(500).json({ error: "Error registering user" });
-    }
+router.get("/", (req, res) => {
+    const sql = "SELECT * FROM helps";
+    db.query(sql, (err, data) => {
+        if (err) {
+        console.error("Error executing query:", err);
+        return res.status(500).json({ error: "Internal Server Error" });
+        }
+        return res.status(200).json(data);
     });
+});
 
-    module.exports = router;
+router.post("/", (req, res) => {
+    const newHelps = req.body;
+    const sql = "INSERT INTO helps SET ?";
+    db.query(sql, newHelps, (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
+module.exports = router;
