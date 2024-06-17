@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const db = require("../config/db");
 
 const router = express.Router();
 const saltRounds = 10;
@@ -11,31 +12,35 @@ const { ACCESS_TOKEN_SECRET } = process.env;
 router.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
 
+  if (!name || !email || !password) {
+    return res.status(400).json({ error: "All fields are required" });
+  }
+
   try {
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    // Query SQL untuk memasukkan user baru
-    const insertQuery = 'INSERT INTO users (name, email, password) VALUES (?, ?, ?)';
-    connection.query(insertQuery, [name, email, hashedPassword], (err, result) => {
-      if (err) {
-        console.error("Error registering user:", err);
-        return res.status(500).json({ error: "Error registering user" });
-      }
+    const sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
+    const values = [name, email, hashedPassword];
 
-      return res.status(201).json({ status: "Success", message: "User registered successfully" });
+    db.query(sql, values, (err, data) => {
+      if (err) {
+        console.error('Error registering user:', err);
+        return res.status(500).json({ error: 'Error registering user' });
+      }
+      return res.status(201).json({ status: 'Success', message: 'User registered successfully' });
     });
-  } catch (error) {
-    console.error("Error registering user:", error);
-    return res.status(500).json({ error: "Error registering user" });
+  } catch (err) {
+    console.error('Error hashing password:', err);
+    return res.status(500).json({ error: 'Error hashing password' });
   }
 });
 
 router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  
   try {
-    const { email, password } = req.body;
 
-    const user = await User.findOne({ where: { email } });
+    const user = await user.findOne({ where: { email } });
 
     if (!user) {
       return res.status(401).json({ error: "Fail" });
