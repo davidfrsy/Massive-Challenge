@@ -39,29 +39,35 @@ router.post("/login", async (req, res) => {
   const { email, password } = req.body;
   
   try {
+    const sql = "SELECT * FROM users WHERE email = ?";
+    db.query(sql, [email], async (err, results) => {
+      if (err) {
+        console.error("Error querying database:", err);
+        return res.status(500).json({ error: "Error querying database" });
+      }
 
-    const user = await user.findOne({ where: { email } });
+      if (results.length === 0) {
+        return res.status(401).json({ error: "Email or password is incorrect" });
+      }
 
-    if (!user) {
-      return res.status(401).json({ error: "Fail" });
-    }
+      const user = results[0];
+      const isMatch = await bcrypt.compare(password, user.password);
 
-    const isMatch = await bcrypt.compare(password, user.password);
+      if (isMatch) {
+        const userData = { name: user.name };
+        console.log(ACCESS_TOKEN_SECRET)
+        const token = jwt.sign({ name: user.name }, ACCESS_TOKEN_SECRET, {
+          expiresIn: "1d",
+        });
 
-    console.log(user.dataValues.name);
-    if (isMatch) {
-      const userData = {name: user.dataValues.name};
-      const token = jwt.sign({ name: user.dataValues.name }, ACCESS_TOKEN_SECRET, {
-        expiresIn: "1d",
-      });
-
-      return res.status(200).json({ status: "Success", token, user:userData });
-    } else {
-      return res.status(401).json({ error: "Password not matched" });
-    }
+        return res.status(200).json({ status: "Success", token, user: userData });
+      } else {
+        return res.status(401).json({ error: "Email or password is incorrect" });
+      }
+    });
   } catch (error) {
     console.error("Error logging in:", error);
-    return res.status(500).json({ error: "Error logging in", err: error });
+    return res.status(500).json({ error: "Error logging in" });
   }
 });
 
