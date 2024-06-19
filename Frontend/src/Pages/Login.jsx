@@ -24,10 +24,10 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post(
-        "http://localhost:3001/auth/login",
-
-        { email: values.email, password: values.password }
+      const response = await axios.post("http://localhost:3001/auth/login",
+        { 
+          email: values.email,
+          password: values.password }
       );
 
       if (response.status === 200 && response.data.status === "Success") {
