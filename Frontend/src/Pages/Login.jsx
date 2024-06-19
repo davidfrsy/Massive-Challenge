@@ -45,6 +45,9 @@ const Login = () => {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="relative flex flex-col m-6 space-y-8 bg-white shadow-2xl rounded-2xl md:flex-row md:space-y-0">
         <div className="flex flex-col justify-center p-8 md:p-14 max-w-sm">
+          <div className="text-blue-600 hover:text-blue-800 text-xs">
+            <Link to="/">Kembali</Link>
+          </div>
           <span className="mb-3 text-4xl font-bold">Welcome Back!</span>
           <form onSubmit={handleSubmit}>
             <div className="py-4">
