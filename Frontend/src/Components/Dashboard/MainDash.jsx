@@ -5,6 +5,7 @@ import { useAuth } from "../../Pages/AuthProvider";
 const MainDash = () => {
   const auth = useAuth();
   console.log(auth);
+
   return (
     <div className="bg-blue-100 rounded-l-3xl w-full">
       <div className="m-5">
