@@ -20,9 +20,6 @@ const MainDash = () => {
               memberikan beberapa fitur dashboard yang memudahkan bagi para
               pembudidaya ikan.
             </p>
-            <button className="button btn-md rounded-md shadow-md bg-blue-600 hover:bg-blue-700 text-white">
-              Learn More
-            </button>
           </div>
         </div>
         <div className="flex space-x-5 m-5">
