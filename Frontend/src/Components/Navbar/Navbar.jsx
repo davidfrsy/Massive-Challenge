@@ -38,7 +38,8 @@ const Navbar = () => {
                                 <a>Budidaya</a>
                                 <ul className="p-2">
                                     <li><Link to="/dashboard">Dashboard</Link></li>
-                                    <li><Link to="/dash-hasilpanen">Manajemen Panen</Link></li>
+                                    <li><Link to="/dash-operasi">Operasional</Link></li>
+                                    <li><Link to="/dash-hasilpanen">Hasil Panen</Link></li>
                                     <li><Link to="/dash-keuangan">Keuangan</Link></li>
                                 </ul>
                             </li>
@@ -55,7 +56,8 @@ const Navbar = () => {
                                 <summary>Budidaya</summary>
                                 <ul className="p-2 bg-white">
                                     <li><Link to="/dashboard">Dashboard</Link></li>
-                                    <li><Link to="/dash-hasilpanen">Manajemen Panen</Link></li>
+                                    <li><Link to="/dash-operasi">Operasional</Link></li>
+                                    <li><Link to="/dash-hasilpanen">Hasil Panen</Link></li>
                                     <li><Link to="/dash-keuangan">Keuangan</Link></li>
                                 </ul>
                             </details>

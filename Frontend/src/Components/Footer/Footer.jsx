@@ -36,12 +36,17 @@ const Footer = () => {
             <nav>
                 <h6 className="footer-title text-slate-100">Social</h6> 
                 <div className="grid grid-flow-col gap-4">
-                    <img src={lg_fb} alt="" className='h-8' />
-                    <img src={lg_insta} alt="" className='h-8' />
-                    <img src={lg_yt} alt="" className='h-8' />
+                    <a href="https://www.instagram.com/aquacare.official?igsh=MW1vaDQzc3NvOXdrbQ==">
+                        <img src={lg_insta} alt="" className='h-8' />
+                    </a>
+                    <a href="https://www.youtube.com">
+                        <img src={lg_yt} alt="" className='h-8' />
+                    </a>
                 </div>
                 <div className='block'>
-                    <img src={lg_light} alt="" className='h-12' />
+                    <a href="">
+                        <img src={lg_light} alt="" className='h-12' />
+                    </a>
                 </div>
             </nav>
         </footer>

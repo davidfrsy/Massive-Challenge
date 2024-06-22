@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import NavDash from './NavDash'
 import axios from 'axios';
+import { jwtDecode } from "jwt-decode";
 
 import updateIcon from '../../Assets/update.png'; // Path ke ikon update
 import deleteIcon from '../../Assets/delete.png'; // Path ke ikon delete
@@ -11,14 +12,18 @@ import HasilPanenPDF from "./HasilPanenPdf";
 
 const HasilPanen = () => {
     const [hasilpanen, setHasil] = useState([]);
+    const token = localStorage.getItem("site")
+    const decode = jwtDecode(token)
+
     const [form, setForm] = useState({ 
-        id: '', 
+        id: null, 
         tanggal: '', 
         pemeliharaan: '', 
         jenis: '', 
         harga: '', 
         berat: '', 
-        total: '' 
+        total: '',
+        user_id: decode.id,
     });
     const [isUpdateMode, setIsUpdateMode] = useState(false);
 
@@ -28,7 +33,7 @@ const HasilPanen = () => {
 
     const fetchHasil = async () => {
         try {
-            const res = await axios.get("http://localhost:3001/hasilpanen");
+            const res = await axios.post("http://localhost:3001/hasilpanen/data",  {user_id: decode.id});
             setHasil(res.data);
         } catch (err) {
             console.log(err);
@@ -48,13 +53,14 @@ const HasilPanen = () => {
             await axios.post("http://localhost:3001/hasilpanen", form);
             }
             setForm({
-                id: "",
+                id: null,
                 tanggal: "",
                 pemeliharaan: "",
                 jenis: "",
                 harga: "",
                 berat: "",
                 total: "",
+                user_id: decode.id,
             });
             setIsUpdateMode(false);
             fetchHasil();
@@ -81,13 +87,14 @@ const HasilPanen = () => {
 
     const handleAdd = () => {
         setForm({
-            id: "",
+            id:  "",
             tanggal: "",
             pemeliharaan: "",
             jenis: "",
             harga: "",
             berat: "",
             total: "",
+            user_id: decode.id,
         });
         setIsUpdateMode(false);
         document.getElementById("my_modal_1").showModal();
@@ -184,6 +191,7 @@ const HasilPanen = () => {
                                         </label>
                                         <input 
                                             type="text" 
+                                            placeholder='pemeliharaan ke ?'
                                             name="pemeliharaan" 
                                             value={form.pemeliharaan} 
                                             onChange={handleChange} 
@@ -197,6 +205,7 @@ const HasilPanen = () => {
                                         </label>
                                         <input 
                                             type="text" 
+                                            placeholder='jenis ikan'
                                             name="jenis" 
                                             value={form.jenis} 
                                             onChange={handleChange} 
@@ -206,6 +215,7 @@ const HasilPanen = () => {
                                         <label htmlFor="harga" className='font-bold text-lg'>Harga</label>
                                         <input 
                                             type="text" 
+                                            placeholder='harga jual'
                                             name="harga" 
                                             value={form.harga} 
                                             onChange={handleChange} 
@@ -215,6 +225,7 @@ const HasilPanen = () => {
                                         <label htmlFor="berat" className='font-bold text-lg'>Berat</label>
                                         <input 
                                             type="text" 
+                                            placeholder='berat hasil panen'
                                             name="berat" 
                                             value={form.berat} 
                                             onChange={handleChange} 
@@ -224,6 +235,7 @@ const HasilPanen = () => {
                                         <label htmlFor="Total" className='font-bold text-lg'>Total</label>
                                         <input 
                                             type="text" 
+                                            placeholder='total penjualan'
                                             name="total" 
                                             value={form.total} 
                                             onChange={handleChange} 

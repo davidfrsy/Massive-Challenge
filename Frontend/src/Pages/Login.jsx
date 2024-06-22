@@ -48,7 +48,8 @@ const Login = () => {
           <div className="text-blue-600 hover:text-blue-800 text-xs">
             <Link to="/">Kembali</Link>
           </div>
-          <span className="mb-3 text-4xl font-bold">Welcome Back!</span>
+          <span className="mb-3 text-4xl font-bold text-center">Welcome Back!</span>
+          <span className="text-center text-lg font-bold text-blue-800">AquaCare Dashboard</span>
           <form onSubmit={handleSubmit}>
             <div className="py-4">
               <label htmlFor="email" className="mb-2 text-md">
@@ -78,14 +79,6 @@ const Login = () => {
             </div>
             <button className="text-center w-full bg-blue-600 text-white p-2 rounded-lg mb-6 hover:bg-blue-800">
               Log in
-            </button>
-            <button className="w-full border border-gray-300 text-md p-2 rounded-lg mb-6 hover:bg-black hover:text-white">
-              <img
-                src={googleIcon}
-                alt="Google Icon"
-                className="w-6 h-6 inline mr-2"
-              />
-              Log in with Google
             </button>
             <div className="text-center text-gray-400">
               Create a new account?{" "}

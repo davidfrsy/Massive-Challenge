@@ -25,7 +25,7 @@ const About = () => {
                         Dengan adanya Website ini maka dengan mudah 
                         dapat membantu berjalannya budidaya ikan. 
                         Tidak hanya memberikan layanan dalam bentuk 
-                        Website, AquaMind juga menyediakan layanan 
+                        Website, AquaCare juga menyediakan layanan 
                         dalam aplikasi Mobile
                     </p>
                 </div>

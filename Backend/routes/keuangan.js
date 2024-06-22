@@ -71,4 +71,28 @@ router.delete("/:id", (req, res) => {
     });
 });
 
+// by id
+router.get("/:id", (req, res) => {
+    const { id } = req.params;
+    const sql = "SELECT * FROM keuangan where id=?";
+    db.query(sql, (err, data) => {
+        if (err) {
+            console.error("Error executing query:", err);
+            return res.status(500).json({ error: "Internal Server Error" });
+        }
+        return res.status(200).json(data,id);
+    });
+});
+
+router.post("/data", (req, res) => {
+    const {user_id} = req.body;
+    const sql = "SELECT * FROM keuangan where user_id=?";
+    db.query(sql, user_id, (err, data) => {
+        if (err) {
+            console.error("Error executing query:", err);
+            return res.status(500).json({ error: "Internal Server Error" });
+        }
+        return res.status(200).json(data);
+    });
+});
 module.exports = router;

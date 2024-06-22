@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavDash from './NavDash'
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 import updateIcon from "../../Assets/update.png"; // Path ke ikon update
 import deleteIcon from "../../Assets/delete.png"; // Path ke ikon delete
@@ -11,13 +12,17 @@ import KeuanganPDF from "./KeuanganPdf";
 
 const Operasional = () => {
     const [keuangan, setKeuangan] = useState([]);
+    const token = localStorage.getItem("site")
+    const decode = jwtDecode(token)
+
     const [form, setForm] = useState({
-        id: "",
+        id: null,
         tanggal: "",
         pemeliharaan: "",
         operasional: "",
         panen: "",
         pendapatan: "",
+        user_id: decode.id,
     });
     const [isUpdateMode, setIsUpdateMode] = useState(false);
 
@@ -27,7 +32,7 @@ const Operasional = () => {
     
     const fetchKeuangan = async () => {
         try {
-            const res = await axios.get("http://localhost:3001/keuangan");
+            const res = await axios.post("http://localhost:3001/keuangan/data", {user_id: decode.id});
             setKeuangan(res.data);
         } catch (err) {
             console.log(err);
@@ -53,6 +58,7 @@ const Operasional = () => {
                 operasional: "",
                 panen: "",
                 pendapatan: "",
+                user_id: decode.id,
             });
             setIsUpdateMode(false);
             fetchKeuangan();
@@ -82,10 +88,10 @@ const Operasional = () => {
             id: "",
             tanggal: "",
             pemeliharaan: "",
-            bibit: "",
-            pakan: "",
-            suplemen: "",
-            lainnya: "",
+            operasional: "",
+            panen: "",
+            pendapatan: "",
+            user_id: decode.id,
         });
         setIsUpdateMode(false);
         document.getElementById("my_modal_1").showModal();
@@ -180,6 +186,7 @@ const Operasional = () => {
                                         <label htmlFor="pemeliharaan" className='font-bold text-lg'>Pemeliharaan</label>
                                         <input 
                                             type="text"
+                                            placeholder="pemeliharaan ke ?"
                                             name="pemeliharaan"
                                             value={form.pemeliharaan}
                                             onChange={handleChange} 

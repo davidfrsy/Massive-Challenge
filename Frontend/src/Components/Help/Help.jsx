@@ -29,6 +29,10 @@ const Help = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!form.name || !form.email || !form.message) {
+            alert("Semua field harus diisi!");
+            return;
+        }
         try {
             await axios.post("http://localhost:3001/helps", form);
             setForm({
@@ -37,7 +41,7 @@ const Help = () => {
                 message: '',
             });
             fetchHelps();
-            alert("Anda telah mengisi form Bantuan");
+            alert("Terimakasih telah mengisi form Bantuan");
         } catch (err) {
             console.log(err);
         }
