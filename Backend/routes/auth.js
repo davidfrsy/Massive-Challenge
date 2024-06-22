@@ -56,7 +56,7 @@ router.post("/login", async (req, res) => {
       if (isMatch) {
         const userData = { name: user.name };
         console.log(ACCESS_TOKEN_SECRET)
-        const token = jwt.sign({ name: user.name }, ACCESS_TOKEN_SECRET, {
+        const token = jwt.sign({ id: user.id, name: user.name }, ACCESS_TOKEN_SECRET, {
           expiresIn: "1d",
         });
 

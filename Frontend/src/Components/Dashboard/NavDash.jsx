@@ -11,13 +11,6 @@ const NavDash = () => {
             <div className='navbar-start'>
               
             </div>
-            <div className="form-control relative navbar-center">
-                <input 
-                    type="text" 
-                    placeholder="Search" 
-                    className="input input-bordered w-24 h-8 md:w-auto rounded-lg" />
-                <i className="fa fa-search absolute right-2 translate-y-1/2 text-gray-400"></i>
-            </div>
             <div className='navbar-end'>
               <div className="dropdown dropdown-end">
                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">

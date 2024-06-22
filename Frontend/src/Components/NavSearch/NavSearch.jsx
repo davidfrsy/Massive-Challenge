@@ -1,9 +1,28 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import logo from '../../Assets/logo-dark-blue.svg'
+import ilgn from "../../Assets/icon-lgn.png";
+import isgn from "../../Assets/icon-sg.png";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../Pages/AuthProvider';
 
 const NavSearch = () => {
+    const auth = useAuth();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        // Periksa apakah ada token dalam auth
+        if (auth.token) {
+            setIsLoggedIn(true);
+        } else {
+            setIsLoggedIn(false);
+        }
+    }, [auth.token]);
+
+    const handleLogout = () => {
+        auth.logOut();
+    };
+    
   return (
     <div className='drop-shadow-lg'>
         <div className="navbar bg-base-100">
@@ -12,15 +31,36 @@ const NavSearch = () => {
                     <img src={logo} alt="Logo" className='h-24 py-5 px-4' />
                 </Link>
             </div>
-            <div className="flex-none gap-2">
-                <div className="form-control relative">
-                    <input 
-                        type="text" 
-                        placeholder="Search" 
-                        className="input input-bordered w-24 h-8 md:w-auto rounded-lg" />
-                    <i className="fa fa-search absolute top-1/2 transform -translate-y-1/2 text-gray-400 right-3 "></i>
+            <div className="navbar-end">
+                    {isLoggedIn ? 
+                    (
+                        <button onClick={handleLogout} className="btn m-1 bg-white">
+                            Logout
+                        </button>
+                    ) 
+                    : 
+                    (
+                        <div className="dropdown dropdown-end">
+                            <div tabIndex={0} role="button" className="btn m-1 bg-white">
+                                Login
+                            </div>
+                            <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-white rounded-box w-52 space-y-2">
+                                <li className="border rounded-lg p-1 shadow-md hover:bg-blue-600 hover:text-white">
+                                    <Link to="/register">
+                                        <img src={isgn} alt="img" className='w-8' />
+                                        Sign Up
+                                    </Link>
+                                </li>
+                                <li className="border rounded-lg p-1 shadow-md hover:bg-blue-600 hover:text-white">
+                                    <Link to="/Login">
+                                        <img src={ilgn} alt="img" />
+                                        Login
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
+                    )}
                 </div>
-            </div>
         </div>
     </div>
   )

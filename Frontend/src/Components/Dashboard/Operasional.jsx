@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavDash from "./NavDash";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 import updateIcon from "../../Assets/update.png"; // Path ke ikon update
 import deleteIcon from "../../Assets/delete.png"; // Path ke ikon delete
@@ -11,14 +12,18 @@ import OperasionalPDF from "./OperasionalPdf";
 
 const Operasional = () => {
   const [operasional, setOperasional] = useState([]);
+  const token = localStorage.getItem("site")
+  const decode = jwtDecode(token)
+
   const [form, setForm] = useState({
-    id: "",
+    id: null,
     tanggal: "",
     pemeliharaan: "",
     bibit: "",
     pakan: "",
     suplemen: "",
     lainnya: "",
+    user_id: decode.id,
   });
   const [isUpdateMode, setIsUpdateMode] = useState(false);
 
@@ -28,7 +33,7 @@ const Operasional = () => {
 
   const fetchOperasional = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/operasional");
+      const res = await axios.post("http://localhost:3001/operasional/data", {user_id: decode.id});
       setOperasional(res.data);
     } catch (err) {
       console.log(err);
@@ -55,6 +60,7 @@ const Operasional = () => {
         pakan: "",
         suplemen: "",
         lainnya: "",
+        user_id: decode.id,
       });
       setIsUpdateMode(false);
       fetchOperasional();
@@ -88,6 +94,7 @@ const Operasional = () => {
       pakan: "",
       suplemen: "",
       lainnya: "",
+      user_id: decode.id,
     });
     setIsUpdateMode(false);
     document.getElementById("my_modal_1").showModal();
@@ -184,6 +191,7 @@ const Operasional = () => {
                       </label>
                       <input
                         type="text"
+                        placeholder="pemeliharaan ke ?"
                         name="pemeliharaan"
                         value={form.pemeliharaan}
                         onChange={handleChange}
@@ -196,6 +204,7 @@ const Operasional = () => {
                       </label>
                       <input
                         type="text"
+                        placeholder="biaya bibit"
                         name="bibit"
                         value={form.bibit}
                         onChange={handleChange}
@@ -208,6 +217,7 @@ const Operasional = () => {
                       </label>
                       <input
                         type="text"
+                        placeholder="biaya pakan"
                         name="pakan"
                         value={form.pakan}
                         onChange={handleChange}
@@ -220,6 +230,7 @@ const Operasional = () => {
                       </label>
                       <input
                         type="text"
+                        placeholder="biaya suplemen"
                         name="suplemen"
                         value={form.suplemen}
                         onChange={handleChange}
@@ -232,6 +243,7 @@ const Operasional = () => {
                       </label>
                       <input
                         type="text"
+                        placeholder="biaya lainnya"
                         name="lainnya"
                         value={form.lainnya}
                         onChange={handleChange}
