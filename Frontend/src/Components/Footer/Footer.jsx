@@ -21,11 +21,11 @@ const Footer = () => {
             </aside> 
             <nav>
                 <h6 className="footer-title text-slate-100">Informasi Aplikasi</h6> 
-                <a className="link link-hover">Alarm Pengganti Air</a>
-                <a className="link link-hover">Alarm Pemberian Antibiotik</a>
-                <a className="link link-hover">Alarm pemberian Pakan</a>
-                <a className="link link-hover">Scan Penyakit Ikan</a>
-                <a className="link link-hover">Chat Bot</a>
+                <span className="">Alarm Pengganti Air</span>
+                <span className="">Alarm Pemberian Antibiotik</span>
+                <span className="">Alarm pemberian Pakan</span>
+                <span className="">Scan Penyakit Ikan</span>
+                <span className="">Chat Bot</span>
             </nav> 
             <nav>
                 <h6 className="footer-title text-slate-100">Akses Link</h6> 

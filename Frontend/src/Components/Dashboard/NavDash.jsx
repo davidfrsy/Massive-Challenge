@@ -1,5 +1,5 @@
 import React from 'react'
-import sugi from '../../Assets/paksugi.png'
+import avatar from '../../Assets/default.jpg'
 import { useAuth } from '../../Pages/AuthProvider';
 
 const NavDash = () => {
@@ -15,7 +15,7 @@ const NavDash = () => {
               <div className="dropdown dropdown-end">
                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                   <div className="w-10 rounded-full">
-                    <img src={sugi} alt="Tailwind CSS Navbar component"  />
+                    <img src={avatar} alt="Tailwind CSS Navbar component"  />
                   </div>
                 </div>
                 <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[100] p-2 shadow bg-base-100 rounded-box w-52">
