@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import './Slide.css';
 import modul1 from '../../Assets/modul1.png'
+import modul2 from '../../Assets/modul2.png'
+import modul3 from '../../Assets/modul3.jpg'
 // Pindah Page
 import { Link } from 'react-router-dom'
 
@@ -122,7 +124,7 @@ const Slide = () => {
         </li>
         <li className='card'>
           <div className='konten'>
-          <div className='img'><img src="" alt="img" draggable="false" /></div>
+          <div className='img'><img src={modul2} alt="img" draggable="false" /></div>
             <h2>Aqua Care: Jaga Kualitas Air Kolam Ikan Lele</h2>
             <p>
               Pelajari cara menjaga kualitas air kolam ikan 
@@ -136,7 +138,7 @@ const Slide = () => {
         </li>
         <li className='card'>
           <div className='konten'>
-            <div className='img'><img src="" alt="img" draggable="false" /></div>
+            <div className='img'><img src={modul3} alt="img" draggable="false" /></div>
             <h2>Aqua Care: Solusi Cerdas untuk Manajemen Perikanan Modern</h2>
             <p>
               Aqua Care merevolusi manajemen perikanan dengan 
