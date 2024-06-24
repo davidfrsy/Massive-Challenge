@@ -1,7 +1,6 @@
 import React from 'react'
 import ft_app from '../../Assets/mobile-app.png'
 import barcode from '../../Assets/qr.png'
-import lg_fb from '../../Assets/Facebook.png'
 import lg_insta from '../../Assets/Instagram.png'
 import lg_yt from '../../Assets/YouTube.png'
 import lg_light from '../../Assets/logo-putih.png'
@@ -39,7 +38,7 @@ const Footer = () => {
                     <a href="https://www.instagram.com/aquacare.official?igsh=MW1vaDQzc3NvOXdrbQ==">
                         <img src={lg_insta} alt="" className='h-8' />
                     </a>
-                    <a href="https://www.youtube.com">
+                    <a href="https://www.youtube.com/@aquacare.official">
                         <img src={lg_yt} alt="" className='h-8' />
                     </a>
                 </div>

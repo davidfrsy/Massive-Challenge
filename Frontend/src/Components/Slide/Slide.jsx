@@ -122,27 +122,29 @@ const Slide = () => {
         </li>
         <li className='card'>
           <div className='konten'>
-            <div className='img'><img src="https://img.freepik.com/free-photo/wild-mouth-white-meal-seafood_1203-6019.jpg?t=st=1718265602~exp=1718269202~hmac=cfca9f575c6a640341f10d9557e66c24b9b7a1dbc34658a07c6e89d5046a45cc&w=996" alt="img" draggable="false" /></div>
-            <h2>Kandungan Gizi dan Manfaat Ikan Bawal untuk Kesehatan</h2>
+          <div className='img'><img src="" alt="img" draggable="false" /></div>
+            <h2>Aqua Care: Jaga Kualitas Air Kolam Ikan Lele</h2>
             <p>
-              Ikan bawal mengandung berbagai nutrisi baik, 
-              seperti asam lemak omega-3, vitamin dan mineral 
-              penting, serta protein
+              Pelajari cara menjaga kualitas air kolam ikan 
+              lele agar tetap sehat dan produktif dalam video 
+              ini. Kami membahas pentingnya kualitas air, 
+              faktor-faktor yang mempengaruhinya seperti pH, 
+              suhu, oksigen terlarut, dan kandungan amonia.
             </p>
-            <Link to="/modul" >Baca Selengkapnya...</Link>
+            <Link to="/modul2" >Baca Selengkapnya...</Link>
           </div>
         </li>
         <li className='card'>
           <div className='konten'>
-            <div className='img'><img src="https://img.freepik.com/free-photo/close-up-hand-holding-raw-fish_23-2148295207.jpg?t=st=1718265545~exp=1718269145~hmac=93a8f5bcda93770c18a530ee117a72fc74636c14df24cfedb0a0b7502875f778&w=900" alt="img" draggable="false" /></div>
-            <h2>Ikan Nila: Sumber Protein Tinggi dan Gizi Seimbang untuk Kesehatan Keluarga</h2>
+            <div className='img'><img src="" alt="img" draggable="false" /></div>
+            <h2>Aqua Care: Solusi Cerdas untuk Manajemen Perikanan Modern</h2>
             <p>
-              Ikan nila adalah ikan air tawar yang 
-              populer di budidaya perikanan karena 
-              pertumbuhannya yang cepat dan toleransinya 
-              terhadap berbagai kondisi lingkungan.
+              Aqua Care merevolusi manajemen perikanan dengan 
+              teknologi canggih, termasuk pemantauan 
+              real-time dan AI untuk pakan, air, serta 
+              penyakit ikan. 
             </p>
-            <Link to="/modul" >Baca Selengkapnya...</Link>
+            <Link to="/modul3" >Baca Selengkapnya...</Link>
           </div>
         </li>
       </ul>
