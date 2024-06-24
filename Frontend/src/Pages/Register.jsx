@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+// Assets Gambar
 import bg_login from "../Assets/bg-login.png";
 import lg_login from "../Assets/lg-login.png";
 
@@ -11,14 +12,39 @@ const Register = () => {
     password: "",
   });
 
+  const [passwordError, setPasswordError] = useState("");
+
   const navigate = useNavigate();
 
   const handleInput = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const validatePassword = (password) => {
+    const minLength = /.{8,}/;
+    const hasNumber = /[0-9]/;
+    const hasUpperCase = /[A-Z]/;
+
+    if (!minLength.test(password)) {
+      return "Password harus berisi minimal 8 karakter.";
+    }
+    if (!hasNumber.test(password)) {
+      return "Password harus berisi minimal 1 angka.";
+    }
+    if (!hasUpperCase.test(password)) {
+      return "Password harus berisi minimal 1 huruf kapital.";
+    }
+    return "";
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const passwordValidationResult = validatePassword(formData.password);
+    if (passwordValidationResult) {
+      setPasswordError(passwordValidationResult);
+      alert(passwordValidationResult);  // Menampilkan alert jika password tidak valid
+      return;
+    }
     try {
       const response = await axios.post("http://localhost:3001/auth/register", formData);
       if (response.data.status === "Success") {
